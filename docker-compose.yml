@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  pg-primary:
+    build:
+      context: .
+      dockerfile: Dockerfile-pg-primary
+    image: pg-primary
+    container_name: pg-primary
+    environment:
+      POSTGRES_PASSWORD: password
+    networks:
+      - pg-network
+
+  pg-replica:
+    build:
+      context: .
+      dockerfile: Dockerfile-pg-replica
+    image: pg-replica
+    container_name: pg-replica
+    environment:
+      POSTGRES_PASSWORD: password
+    depends_on:
+      - pg-primary
+    networks:
+      - pg-network
+
+networks:
+  pg-network:
+    driver: bridge

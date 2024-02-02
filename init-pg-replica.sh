@@ -21,5 +21,5 @@ EOSQL
 
 # Create a publication for the table
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
-    CREATE SUBSCRIPTION my_subscription CONNECTION 'host=172.17.0.2 port=5432 dbname=postgres password=password' PUBLICATION my_publication;
+    CREATE SUBSCRIPTION my_subscription CONNECTION 'host=pg-primary port=5432 dbname=postgres password=password' PUBLICATION my_publication;
 EOSQL
