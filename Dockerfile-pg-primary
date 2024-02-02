@@ -1,0 +1,11 @@
+# Use the official PostgreSQL image as the base
+FROM postgres:latest
+
+# Set the environment variable to control the WAL level
+ENV POSTGRES_INITDB_ARGS="-c wal_level=logical"
+
+# Copy the initialization script to the Docker container
+COPY init-pg-primary.sh /docker-entrypoint-initdb.d/init-pg-primary.sh
+
+# Make the script executable
+RUN chmod +x /docker-entrypoint-initdb.d/init-pg-primary.sh
